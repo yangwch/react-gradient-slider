@@ -52,7 +52,7 @@ exports.color2RGB = color => {
     let hexColor = fmtColorLength(color);
     const rgbArr = [];
     for(let i = 1; i < hexColor.length; i+=2) {
-      rgbArr.push(parseInt(`0x${hexColor.slice(i, i + 2)}`, 10));
+      rgbArr.push(parseInt(`0x${hexColor.slice(i, i + 2)}`, 16));
     }
     return extractRGBFromArray(rgbArr);
   }
