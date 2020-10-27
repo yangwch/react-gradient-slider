@@ -1,0 +1,23 @@
+.gradientSlider {
+  position: relative;
+  margin-top: 10px;
+  .operateButtons {
+    height: 30px;
+    color: #999;
+    line-height: 1rem;
+    text-align: right;
+  }
+}
+:global {
+  .slider-popover-overlay {
+    .ant-popover-arrow {
+      display: none;
+    }
+    .ant-popover-inner {
+      transform: translate(0, -10px);
+    }
+    .ant-popover-inner-content {
+      padding: 0;
+    }
+  }
+}

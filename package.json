@@ -4,13 +4,19 @@
   "private": true,
   "dependencies": {
     "cra-template": "1.1.0",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.2",
+    "rc-tooltip": "^4.2.3",
     "react": "^17.0.1",
+    "react-color": "^2.18.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.0"
+    "react-scripts": "4.0.0",
+    "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test-rs": "react-scripts test",
     "test": "mocha ./test",
     "eject": "react-scripts eject"
   },
@@ -33,7 +39,7 @@
     ]
   },
   "devDependencies": {
-    "mocha": "^8.2.0",
-    "chai": "^4.2.0"
+    "chai": "^4.2.0",
+    "mocha": "^8.2.0"
   }
 }
