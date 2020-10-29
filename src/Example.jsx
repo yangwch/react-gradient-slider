@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import GradientSlider from './GradientSlider';
+import GradientSlider from './GradientSlider/Container';
 
 export default class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: [{ color: '#fff', position: 0 }, { color: '#ff0000', position: 100 }]
+      colors: [{ color: '#fff', position: 0 }, { color: '#ff0000', position: 70 }, { color: '#000', position: 100 }]
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -21,7 +21,7 @@ export default class Example extends Component {
     const { colors } = this.state;
     return (
       <div style={{ width: 300, margin: '50px auto'}}>
-      <GradientSlider defaultValue={colors} onChange={onChange} />
+        <GradientSlider defaultValue={colors} onChange={onChange} />
       </div>
     );
   }
