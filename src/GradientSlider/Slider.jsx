@@ -4,16 +4,21 @@ import styled from 'styled-components';
 import { SketchPicker } from 'react-color';
 import Tooltip from 'rc-tooltip';
 
+import './Slider.css';
+
 import 'rc-tooltip/assets/bootstrap_white.css';
 
 const SliderWrapper = styled.div`
   position: relative;
 `;
 
-const SliderThumb = styled.div`
+const SliderThumb = styled.div.attrs(props => ({
+  style: {
+    background: props.color || 'none',
+  },
+}))`
   width: 9px;
   height: 16px;
-  background: ${props => props.color || 'none'};
   border: 2px solid #fff;
 `;
 
@@ -25,7 +30,11 @@ const SliderThumbWrapper = styled.div`
   height: 16px;
 `;
 
-const ColorItem = styled.div`
+const ColorItem = styled.div.attrs(props => ({
+  style: {
+    background: props.color || 'auto',
+  },
+}))`
   width: 100%;
   height: 18px;
   border: 1px solid #f1f1f1;
@@ -112,7 +121,7 @@ const Slider = props => {
 
     return (
       <SliderItem
-        key={`${c.color + c.position + i}`}
+        key={`${c.position}${i}`}
         color={c.color}
         position={c.position}
         isFirstOrLast={isFirstOrLast}

@@ -1,0 +1,6 @@
+.slider-popover-overlay .rc-tooltip-arrow {
+  display: none;
+}
+.slider-popover-overlay .rc-tooltip-inner {
+  padding: 0;
+}

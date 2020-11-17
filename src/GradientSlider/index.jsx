@@ -16,11 +16,17 @@ function GradientSlider(props) {
     onSliderMouseDown,
     activeButtonIndex,
     onSelectColor,
+    buttons,
   } = props;
+  const defaultButtons = <OperateButtons onAdd={onAddColor} onRemove={onRemoveColor} />;
+  let opButtons = defaultButtons;
+  if (buttons && buttons instanceof Function) {
+    opButtons = buttons({ onAddColor, onRemoveColor });
+  }
   return (
     <Wrapper className={styles.gradientSlider}>
       <ButtonsWrapper className={styles.operateButtons}>
-        <OperateButtons onAdd={onAddColor} onRemove={onRemoveColor} />
+        {opButtons}
       </ButtonsWrapper>
       <Slider
         colors={colors}

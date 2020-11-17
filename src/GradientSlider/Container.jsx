@@ -2,11 +2,26 @@ import React from 'react';
 import GradientSlider from './index';
 import { getGradientCenterColor } from '../utils/color';
 
+const TMP_ID_KEY = Symbol('TMP_COLOR_ITEM_ID');
+
 export default props => {
 
-  const { defaultValue = [], onChange } = props;
+  const { defaultValue = [], onChange, buttons } = props;
   const [tmpColors, setTmpColors] = React.useState(defaultValue);
   const [activeButtonIndex, setActiveButtonIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    setTmpColors(
+      (defaultValue || []).map(item => ({
+        ...item,
+        [TMP_ID_KEY]: `${item.color + item.position}`,
+      })),
+    );
+
+    if (activeButtonIndex > defaultValue.length - 1) {
+      setActiveButtonIndex(defaultValue.length - 1);
+    }
+  }, [defaultValue]);
 
   // 添加颜色
   const addColor = () => {
@@ -51,13 +66,6 @@ export default props => {
     onChange(newColors);
   };
 
-  React.useEffect(() => {
-    setTmpColors(defaultValue);
-    if (activeButtonIndex > defaultValue.length - 1) {
-      setActiveButtonIndex(defaultValue.length - 1);
-    }
-  }, [defaultValue]);
-
   const getMovedColors = (startPosition, sliderWidth, index, e) => {
     const { clientX: ex, clientY: ey } = e;
     const { clientX: sx } = startPosition;
@@ -78,10 +86,18 @@ export default props => {
   let onmove = null;
   let onup = null;
 
-  const onMousemove = (startPosition, sliderWidth, index, e) => {
+  const onMousemove = (startPosition, sliderWidth, index, target, e) => {
     if (!startPosition || !sliderWidth) return;
     const newColors = getMovedColors(startPosition, sliderWidth, index, e);
     setTmpColors(newColors);
+    // update sorted active item index
+    setActiveButtonIndex(
+      Math.max(
+        0,
+        newColors.findIndex(c => c[TMP_ID_KEY] === target[TMP_ID_KEY]),
+      ),
+    );
+
   };
 
   // 抬起
@@ -113,7 +129,7 @@ export default props => {
     const { clientX, clientY } = e;
     const startPosition = { clientX, clientY };
     console.log({ clientX, clientY });
-    onmove = onMousemove.bind(this, startPosition, width, index);
+    onmove = onMousemove.bind(this, startPosition, width, index, defaultValue[index]);
     onup = onMouseup.bind(this, startPosition, width, index);
     listenMousemove();
   };
@@ -125,6 +141,7 @@ export default props => {
       onSliderMouseDown={onSliderMouseDown}
       activeButtonIndex={activeButtonIndex}
       onSelectColor={onSelectColor}
+      buttons={buttons}
     />
   );
 }
