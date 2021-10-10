@@ -2,6 +2,7 @@
   "name": "rc-gradient-slider",
   "version": "0.1.0",
   "private": true,
+  "main": "src/GradientSlider/Container.jsx",
   "dependencies": {
     "cra-template": "1.1.0",
     "less": "^3.12.2",

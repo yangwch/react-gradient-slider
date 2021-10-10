@@ -4,7 +4,7 @@ import { getGradientCenterColor } from '../utils/color';
 
 const TMP_ID_KEY = Symbol('TMP_COLOR_ITEM_ID');
 
-export default props => {
+const Container = props => {
 
   const { defaultValue = [], onChange, buttons } = props;
   const [tmpColors, setTmpColors] = React.useState(defaultValue);
@@ -21,7 +21,7 @@ export default props => {
     if (activeButtonIndex > defaultValue.length - 1) {
       setActiveButtonIndex(defaultValue.length - 1);
     }
-  }, [defaultValue]);
+  }, [activeButtonIndex, defaultValue]);
 
   // 添加颜色
   const addColor = () => {
@@ -145,3 +145,6 @@ export default props => {
     />
   );
 }
+
+
+export default Container;
